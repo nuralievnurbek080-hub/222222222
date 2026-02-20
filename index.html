@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>N/Terminal AI</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">N/Terminal <span>AI</span></h1>
+            <p class="subtitle">Торговые сигналы на базе AI модели "CLSTR AI"</p>
+        </header>
+
+        <div class="mode-switch">
+            <button class="mode-btn"><span class="icon">+</span> Форекс</button>
+            <button class="mode-btn active"><span class="icon">⭐</span> OTC</button>
+        </div>
+
+        <section class="main-card">
+            <div class="card-header">
+                <span class="target-icon">◎</span>
+                <h3>Торговые Сигналы</h3>
+            </div>
+
+            <div class="lang-select">
+                <img src="https://flagcdn.com/w20/ru.png" alt="RU">
+                <span>🇷🇺</span>
+                <span class="arrow">⌄</span>
+            </div>
+
+            <div class="input-group">
+                <label>ВАЛЮТНАЯ ПАРА</label>
+                <select id="asset-select">
+                    <option value="OTC AED/CNY">OTC AED/CNY</option>
+                    <option value="EUR/USD">EUR/USD</option>
+                    <option value="GBP/USD">GBP/USD</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>ВРЕМЯ ЭКСПИРАЦИИ</label>
+                <div class="time-grid">
+                    <button class="time-btn active" data-time="5s"><b>5s</b><span>5 seconds</span></button>
+                    <button class="time-btn" data-time="15s"><b>15s</b><span>15 seconds</span></button>
+                    <button class="time-btn" data-time="30s"><b>30s</b><span>30 seconds</span></button>
+                    <button class="time-btn" data-time="1m"><b>1m</b><span>1 minute</span></button>
+                    <button class="time-btn" data-time="3m"><b>3m</b><span>3 minutes</span></button>
+                    <button class="time-btn" data-time="5m"><b>5m</b><span>5 minutes</span></button>
+                </div>
+            </div>
+
+            <button class="get-signal-btn" id="generate-btn">
+                <span class="flash-icon">⚡</span> Получить сигнал
+            </button>
+        </section>
+
+        <div id="result-overlay" class="overlay">
+            <div class="result-card">
+                <h4 id="res-pair">OTC AED/CNY</h4>
+                <div id="res-direction" class="direction">АНАЛИЗ...</div>
+                <div class="accuracy">ВЕРОЯТНОСТЬ: <span id="res-perc">--</span>%</div>
+                <button onclick="closeResult()">ЗАКРЫТЬ</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
