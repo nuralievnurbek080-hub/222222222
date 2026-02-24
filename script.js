@@ -1,5 +1,8 @@
-const tg = window.Telegram.WebApp;
-tg.expand();
+const tg = window.Telegram?.WebApp;
+
+if (tg) {
+    tg.expand();
+}
 
 // Обработка выбора времени
 const timeButtons = document.querySelectorAll('.time-btn');
@@ -15,10 +18,17 @@ const overlay = document.getElementById('result-overlay');
 
 generateBtn.addEventListener('click', async () => {
     const asset = document.getElementById('asset-select').value;
-    const timeframe = document.querySelector('.time-btn.active').dataset.time;
+    const activeTimeButton = document.querySelector('.time-btn.active');
+    const timeframe = activeTimeButton?.dataset.time;
+
+    if (!timeframe) {
+        alert('Выберите время экспирации');
+        return;
+    }
 
     // Эффект нажатия
-    tg.HapticFeedback.impactOccurred('medium');
+    tg?.HapticFeedback?.impactOccurred('medium');
+    generateBtn.disabled = true;
     generateBtn.innerText = "АНАЛИЗ РЫНКА...";
 
     try {
@@ -33,6 +43,8 @@ generateBtn.addEventListener('click', async () => {
 
     } catch (e) {
         alert("Ошибка связи с сервером CLSTR AI");
+        generateBtn.innerText = "Получить сигнал";
+        generateBtn.disabled = false;
     }
 });
 
@@ -44,11 +56,11 @@ function showResult(pair, dir, acc) {
     document.getElementById('res-perc').innerText = acc;
     
     overlay.style.display = 'flex';
-    tg.HapticFeedback.notificationOccurred('success');
+    tg?.HapticFeedback?.notificationOccurred('success');
     generateBtn.innerText = "Получить сигнал";
+    generateBtn.disabled = false;
 }
 
 function closeResult() {
     overlay.style.display = 'none';
 }
-
